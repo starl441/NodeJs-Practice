@@ -4,7 +4,7 @@ const fs = require("fs");
 const index = fs.readFileSync("index.html", "utf-8");
 const data = JSON.parse(fs.readFileSync("data.json", "utf-8"))
 
-
+//This is for github practice purpose
 
 
 const server = http.createServer((req, res) => {
@@ -12,6 +12,7 @@ const server = http.createServer((req, res) => {
         let id=req.url.split('/')[2]
         console.log(typeof(id),id)
         let product=data.products[id-1];
+        
         
         res.setHeader("Content-Type", "text/html");
         let updatedindex=index.replace("**title**",product.title)
