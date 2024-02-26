@@ -4,8 +4,7 @@ const fs = require("fs");
 const index = fs.readFileSync("index.html", "utf-8");
 const data = JSON.parse(fs.readFileSync("data.json", "utf-8"))
 
-//This is for github practice purpose
-
+//this is for upstream for node_4
 
 const server = http.createServer((req, res) => {
     if(req.url.startsWith("/product/")){
