@@ -6,6 +6,7 @@ const data = JSON.parse(fs.readFileSync("data.json", "utf-8"))
 
 //This is for checking upstream link placed for node_3
 
+//This is for checking upstream link placed for node_3
 
 const server = http.createServer((req, res) => {
     if(req.url.startsWith("/product/")){
