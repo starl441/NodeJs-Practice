@@ -4,7 +4,7 @@ const fs = require("fs");
 const index = fs.readFileSync("index.html", "utf-8");
 const data = JSON.parse(fs.readFileSync("data.json", "utf-8"))
 
-//This is for github practice purpose
+//This is for checking upstream link placed for node_3
 
 
 const server = http.createServer((req, res) => {
