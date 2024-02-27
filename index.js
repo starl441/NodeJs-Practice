@@ -1,50 +1,34 @@
-const http = require("http");
+const express = require("express");
 const fs = require("fs");
+const morgan=require('morgan')
 
-const index = fs.readFileSync("index.html", "utf-8");
-const data = JSON.parse(fs.readFileSync("data.json", "utf-8"))
 
-//This is for checking upstream link placed for node_3
 
-//This is for checking upstream link placed for node_3
+const server=express();
 
-const server = http.createServer((req, res) => {
-    if(req.url.startsWith("/product/")){
-        let id=req.url.split('/')[2]
-        console.log(typeof(id),id)
-        let product=data.products[id-1];
-        
-        
-        res.setHeader("Content-Type", "text/html");
-        let updatedindex=index.replace("**title**",product.title)
-        .replace("**thumbnail**",product.thumbnail)
-        .replace("**price**",product.price)
-        .replace("**description**",product.description)
-        .replace("**brand**",product.brand)
-        res.end(updatedindex);
-    
-        
-    }
-//   switch (req.url) {
-//     case "/":
-//       res.setHeader("Content-Type", "text/html");
-//       res.end(index);
-//       break;
-//     case "/api":
-//       res.setHeader("Content-Type", "application/JSON");
-//       res.end(data);
-//       break;
+server.use(express.json())//request json parser
+//server.use(express.static('public'))
+server.use(morgan('dev'))//'default' in place of 'dev' for default log
+const auth=(req,res,next)=>{
+  // if(req.body.password===1234){
+  //   res.json({stats:'Logged in'})
+  //   next()
+  // }
+  // else{
+  //   res.sendStatus(401);
+  // }
+  next()
+}
+server.use(auth)
 
-//     default:
-//       res.writeHead(404);
-//       res.end();
-//   }
-});
+server.get('/product/:id',(req,res)=>{
+console.log(req.params)
 
-server.on("error", (error) => {
-  console.error("Error starting the server:", error);
-});
+ res.end('Hello world')
+})
 
-server.listen(8000, () => {
-  console.log("Server listening on port 8000");
-});
+server.get('/',(req,res)=>{
+  console.log(req.query)
+})
+
+server.listen(3000)
