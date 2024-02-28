@@ -1,34 +1,52 @@
 const express = require("express");
 const fs = require("fs");
-const morgan=require('morgan')
-
+const morgan=require('morgan');
 
 
 const server=express();
 
-server.use(express.json())//request json parser
-//server.use(express.static('public'))
-server.use(morgan('dev'))//'default' in place of 'dev' for default log
-const auth=(req,res,next)=>{
-  // if(req.body.password===1234){
-  //   res.json({stats:'Logged in'})
-  //   next()
-  // }
-  // else{
-  //   res.sendStatus(401);
-  // }
-  next()
-}
-server.use(auth)
+server.use(express.json())
+server.use(morgan('dev'))
 
-server.get('/product/:id',(req,res)=>{
-console.log(req.params)
+const data = JSON.parse(fs.readFileSync('public/data.json', 'utf-8'))
+const products=data.products;
 
- res.end('Hello world')
+//CRUD
+//CREATE
+server.post('/products',(req,res)=>{
+  products.push(req.body)
+  res.json(products)
 })
 
-server.get('/',(req,res)=>{
-  console.log(req.query)
+//READ-1
+server.get('/products',(req,res)=>{
+  console.log(products)
+  res.json(products)
+
 })
 
-server.listen(3000)
+//READ-2
+server.get('/products/:id',(req,res)=>{
+  let product=products[req.params.id-1]
+  res.json(product)
+})
+
+//UPDATE
+//Replaces
+server.put('/products/:id',(req,res)=>{
+  let updatedproduct=req.body
+  
+  products.splice(req.params.id,1,req.body)
+  res.json(products)
+})
+//updates exisitng object
+server.patch('/products/:id',(req,res)=>{
+  let updatedproduct=req.body
+  products.splice(req.params.id,1,{...products[req.params.id],...req.body})
+  console.log({...products[req.params.id],...req.body})
+  res.json(products)
+})
+
+//DELETE
+
+server.listen(3000) 
