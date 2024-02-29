@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require("express");
 const morgan = require("morgan");
 const productrouter=require('./routes/productroutes');
@@ -7,8 +8,11 @@ const server = express();
 
 server.use(express.json());
 server.use(morgan("dev"));
-server.use('/api/',productrouter.router);
-server.use('/users/',userrouter.router);
+server.use(express.static(process.env.PUBLIC_DIR))
+server.use('/products',productrouter.router);
+server.use('/users',userrouter.router);
 
-
-server.listen(3000);
+console.log(process.env.PUBLIC,typeof(process.env.PUBLIC))
+server.listen(process.env.PORT,()=>{
+    console.log('server is running')
+});

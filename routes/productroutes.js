@@ -8,19 +8,19 @@ router
   .post("/", controller.createproduct)
 
   //READ-1
-  .get("/products", controller.readproduct1)
+  .get("/", controller.readproduct1)
 
   //READ-2
-  .get("/products/:id", controller.readproduct2)
+  .get("/:id", controller.readproduct2)
 
   //UPDATE
   //Replaces
-  .put("/products/:id", controller.replaceproduct)
+  .put("/:id", controller.replaceproduct)
   //updates exisitng object
-  .patch("/products/:id", controller.updateproduct)
+  .patch("/:id", controller.updateproduct)
 
   //DELETE
-  .delete("/products/:id", controller.deleteproduct);
+  .delete("/:id", controller.deleteproduct);
 
 
 exports.router=router
