@@ -19,8 +19,6 @@ server.use('*',(req,res)=>{
 })
 
 
-///Just for vercel you can remove this
-
 
 
 console.log(process.env.PUBLIC,typeof(process.env.PUBLIC))
