@@ -1,10 +1,13 @@
 require('dotenv').config()
 const express = require("express");
 const morgan = require("morgan");
-const productrouter=require('./routes/productroutes');
 const userrouter=require('./routes/userroutes')
-
+const productrouter=require('./routes/productroutes');
 const server = express();
+
+
+
+
 
 server.use(express.json());
 server.use(morgan("dev"));
