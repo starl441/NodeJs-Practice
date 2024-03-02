@@ -18,7 +18,7 @@ server.use('*',(req,res)=>{
 })
 
 
-
+///Just for vercel you can remove this
 
 
 
