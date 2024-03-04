@@ -9,6 +9,8 @@ const productRouter = require('./routes/product')
 const userRouter = require('./routes/user')
 console.log('env',process.env.DB_PASSWORD)
 
+mongoose.set('strictQuery', true);
+
 //db connection
 main().catch(err => console.log(err));
 
