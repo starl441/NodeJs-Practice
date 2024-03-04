@@ -1,0 +1,28 @@
+{
+  "version": 2,
+  "name": "my-vercel-project-1",
+  "builds": [
+    {
+      "src": "build/**",
+      "use": "@vercel/static"
+    },
+    {
+        "src":"index.js",
+        "use":"@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/products/(.*)",
+      "dest": "index.js"
+    },
+    {
+      "src": "/products",
+      "dest": "index.js"
+    },
+    {
+      "src": "/",
+      "dest": "build/index.html"
+    }
+  ]
+}
